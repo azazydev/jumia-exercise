@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:sqlite::resource:sample.db
+    driver-class-name: org.sqlite.JDBC
+
+  jpa:
+    database-platform: com.jumia.exercise.config.SQLiteDialect
