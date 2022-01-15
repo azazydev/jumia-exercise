@@ -3,10 +3,7 @@ package com.jumia.exercise.repository;
 import com.jumia.exercise.model.Country;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class CountryRepository {
@@ -28,7 +25,7 @@ public class CountryRepository {
     }
 
     public List<Country> getAll() {
-        return (List<Country>) countries.values();
+        return new ArrayList<>(countries.values());
     }
 
 }

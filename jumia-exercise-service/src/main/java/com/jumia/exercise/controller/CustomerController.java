@@ -9,10 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/customer")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CustomerController {
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
@@ -31,7 +29,8 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<Page<CustomerDto>> search(@RequestParam(value = "page", defaultValue = "0") int page,
                                                     @RequestParam(value = "size", defaultValue = "10") int size,
-                                                    String country, String state) {
+                                                    @RequestParam(value = "country", required = false) String country,
+                                                    @RequestParam(value = "state", required = false) String state) {
 
         List<Customer> customers = customerService.getAll();
         List<CustomerDto> customerDtos = customerMapper.toCustomerDto(customers);

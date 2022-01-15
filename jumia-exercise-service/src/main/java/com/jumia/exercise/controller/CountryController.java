@@ -9,20 +9,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * @author Ahmed Al3zazy
- * customer controller
+ * country controller
  */
 @RestController
 @RequestMapping("/country")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CountryController {
     private final CountryService countryService;
     private final CountryMapper countryMapper;
