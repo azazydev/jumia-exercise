@@ -1,0 +1,89 @@
+<mat-toolbar>
+  <span>Jumia Exercise</span>
+</mat-toolbar>
+<div class="container" >
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Customers</h4>
+        </div>
+        <div class="card-content mt-5">
+          <mat-grid-list  cols="4" rowHeight="5em">
+            <mat-grid-tile>
+              <div style="font-size: 12px">
+              <mat-form-field appearance="fill">
+                <mat-label>Country</mat-label>
+                <mat-select [(value)]="selectedCountry"
+                            (selectionChange)="countryChanged(selectedCountry)">
+
+                  <mat-option *ngFor="let c of countries" [value]="c.name">
+                    {{c.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div style="font-size: 12px">
+              <mat-form-field appearance="fill">
+                <mat-label>State</mat-label>
+                <mat-select [(value)]="selectedState"
+                            (selectionChange)="stateChanged(selectedState)">
+                  <mat-option value="VALID">
+                    VALID
+                  </mat-option>
+                  <mat-option value="INVALID">
+                    INVALID
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+
+
+              <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef> Country </th>
+                <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="countryCode">
+                <th mat-header-cell *matHeaderCellDef> Country Code </th>
+                <td mat-cell *matCellDef="let element"> {{element.countryCode}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef> State </th>
+                <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+            </mat-paginator>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

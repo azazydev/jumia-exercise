@@ -1,0 +1,10 @@
+table {
+  width: 100%;
+}
+.mat-select-trigger {
+  min-width: 60vw;
+}
+
+.mat-select-panel {
+  max-height: 60vh !important;
+}
