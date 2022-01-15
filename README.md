@@ -19,7 +19,23 @@ docker run -p 8080:8080 jumia-exercise-service
 docker build -t jumia-exercise-ui jumia-exercise-ui/
 docker run -p 80:80 jumia-exercise-ui
 ```
-## Swagger
+## To Stop
+```bash
+./stop.sh
+```
+or
+```bash
+docker stop exercise-service
+docker stop exercise-ui
+docker container rm exercise-ui
+docker container rm exercise-service
+```
+## URLs
+Swagger
 ```
 http://localhost:8080/swagger-ui.html
+```
+UI
+```
+http://localhost:80
 ```
