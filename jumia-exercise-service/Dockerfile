@@ -1,12 +1,10 @@
-FROM openjdk:17-alpine as build
+FROM maven:3.8.4-openjdk-17-slim as build
 WORKDIR /workspace/app
 
-COPY mvnw .
-COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 
