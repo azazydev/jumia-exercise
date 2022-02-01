@@ -16,12 +16,4 @@ public class Customer {
     private Integer id;
     private String name;
     private String phone;
-//    @Transient
-//    private String country;
-//    @Transient
-//    private String countryCode;
-//    @Transient
-//    private boolean state;
-
-
 }

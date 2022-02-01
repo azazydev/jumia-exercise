@@ -34,26 +34,27 @@ public class CustomerController {
 
         List<Customer> customers = customerService.getAll();
         List<CustomerDto> customerDtos = customerMapper.toCustomerDto(customers);
+        List<CustomerDto> filteredCustomers = filterCustomers(customerDtos, country, state);
 
-        Page<CustomerDto> customerDtoPage = new PageImpl<>(filterCustomers(customerDtos, country, state, page, size), PageRequest.of(page, size), customers.size());
+        // pagination
+        int totalElements = filteredCustomers.size();
+        filteredCustomers= filteredCustomers.stream().skip(page * size).limit(size).collect(Collectors.toList());
+        Page<CustomerDto> customerDtoPage = new PageImpl<>(filteredCustomers, PageRequest.of(page, size), totalElements);
 
         return ResponseEntity.ok(customerDtoPage);
     }
 
     /**
-     *
-     * @param List<customerDto> list of customerDto to be filtered
-     * @param country filter by country allows null
-     * @param state filter by state allows null
-     * @param page and @param size for pagination
+     * @param customerDtos list of customerDto to be filtered
+     * @param country      filter by country allows null
+     * @param state        filter by state allows null
      * @return List<customerDto> filtered list of customers
      */
-    private List<CustomerDto> filterCustomers(List<CustomerDto> customerDtos, String country, String state, int page, int size) {
+    private List<CustomerDto> filterCustomers(List<CustomerDto> customerDtos, String country, String state) {
 
         List<CustomerDto> filteredCustomers = customerDtos.stream()
                 .filter(c -> country == null || c.getCountry().equals(country))
                 .filter(c -> state == null || c.getState().toString().equals(state))
-                .skip(page * size).limit(size)
                 .collect(Collectors.toList());
         return filteredCustomers;
     }

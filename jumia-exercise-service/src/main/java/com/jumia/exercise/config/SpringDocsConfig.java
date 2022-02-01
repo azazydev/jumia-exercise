@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringDocsConfig {
 
     @Bean
-    public OpenAPI springShopOpenAPI() {
+    public OpenAPI jumiaExerciseOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Jumia Exercise API")
                         .description("Jumia Exercise")
